@@ -14,6 +14,7 @@ const NotesListPage = () => {
         try {
             let response = await fetch('http://localhost:5000/notes');
             let data = await response.json();
+            console.log(data)
             setNotes(data);
         } catch (error) {
             console.error('Error fetching data:', error);

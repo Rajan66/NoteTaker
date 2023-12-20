@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const Note = require('../models/note')
 
 const getNotes = async (req, res) => {
@@ -22,12 +23,13 @@ const getNote = async (req, res) => {
 
 const createNote = async (req, res) => {
     const note = req.body
+    console.log(note)
     const newNote = new Note({ ...note, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() })
     try {
         await newNote.save()
         res.status(201).json(newNote)
     } catch (error) {
-        res.status(404).json({ message: error.message })
+        res.status(409).json({ message: error.message })
     }
 
 }
@@ -49,7 +51,7 @@ const deleteNote = async (req, res) => {
         await Note.findByIdAndDelete(id);
         res.status(200).json({ message: 'Note deleted successfully' });
     } catch (error) {
-        res.status(404).json({ message: 'No note with that id!' })
+        res.status(404).send('No note with that id');
     }
 }
 
