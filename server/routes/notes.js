@@ -4,7 +4,7 @@ const { getNotes, getNote, createNote, updateNote, deleteNote } = require('../co
 const router = express.Router()
 
 router.get('/', getNotes)
-router.get('/', getNote)
+router.get('/:id', getNote)
 
 router.post('/', createNote)
 router.patch('/:id', updateNote)

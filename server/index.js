@@ -3,12 +3,15 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const noteRoutes = require('./routes/notes')
 
 const app = express()
 dotenv.config()
 
 app.use(cors())
 app.use(bodyParser.json({ extended: false }))
+
+app.use('/', noteRoutes)
 
 const CONNECTION_URL = process.env.CONNECTION_URL
 const PORT = process.env.PORT || 5000
