@@ -1,3 +1,4 @@
+const { default: mongoose } = require('mongoose')
 const Note = require('../models/note')
 
 const getNotes = async (req, res) => {
@@ -33,9 +34,26 @@ const createNote = async (req, res) => {
 
 }
 
-const updateNote = async (req, res) => { }
+const updateNote = async (req, res) => {
+    const { id: _id } = req.params
+    const body = req.body
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        res.status(404).json({ message: 'No note with that id!' })
+    }
+    const updatedNote = await Note.findByIdAndUpdate(_id, { ...body, updatedAt: new Date().toISOString(), _id }, { new: true })
+    res.status(200).json(updatedNote)
+}
 
-const deleteNote = async (req, res) => { }
+const deleteNote = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(404).send('No note with that id');
+    }
+
+    await Note.findByIdAndDelete(id);
+    res.status(200).json({ message: 'Note deleted successfully' });
+}
+
 
 module.exports = {
     getNotes,
