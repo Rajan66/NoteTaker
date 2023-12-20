@@ -9,9 +9,9 @@ const app = express()
 dotenv.config()
 
 app.use(cors())
-app.use(bodyParser.json({ extended: false }))
+app.use(bodyParser.json({ extended: true }))
 
-app.use('/', noteRoutes)
+app.use('/notes', noteRoutes)
 
 const CONNECTION_URL = process.env.CONNECTION_URL
 const PORT = process.env.PORT || 5000

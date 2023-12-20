@@ -13,8 +13,9 @@ const getNotes = async (req, res) => {
 const getNote = async (req, res) => { }
 
 const createNote = async (req, res) => {
-    const { note } = req.body
-    const newNote = new Note({ ...note, createdAt: new Date().toISOString, updatedAt: new Date().toISOString })
+    const note = req.body
+    console.log(note)
+    const newNote = new Note({ ...note, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() })
     try {
         await newNote.save()
         res.status(201).json(newNote)
