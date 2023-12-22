@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import ListItem from '../components/ListItem'
 import AddButton from '../components/AddButton'
 
-const NotesListPage = () => {
+const NotesListPage = ({ token }) => {
     let [notes, setNotes] = useState([])
 
     useEffect(() => {

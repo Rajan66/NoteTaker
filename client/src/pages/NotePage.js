@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { ReactComponent as ArrowLeft } from '../assets/arrow-left.svg'
 
-const NotePage = () => {
+const NotePage = ({ token }) => {
     const { id } = useParams()
     const navigate = useNavigate();
     let [note, setNote] = useState(null)
@@ -21,30 +21,33 @@ const NotePage = () => {
         setNote(data)
     }
 
-    let createNote = async () => {
+    let createNote = async ({ token }) => {
         await fetch(`http://localhost:5000/notes/`, {
             method: 'POST',
             headers: {
+                'Authorization': 'Bearer' + token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ ...note, 'updatedAt': new Date() })
         })
     }
 
-    let updateNote = async () => {
+    let updateNote = async ({ token }) => {
         await fetch(`http://localhost:5000/notes/${id}`, {
             method: 'PATCH',
             headers: {
+                'Authorization': 'Bearer' + token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ ...note, 'updatedAt': new Date() })
         })
     }
 
-    let deleteNote = async () => {
+    let deleteNote = async ({ token }) => {
         await fetch(`http://localhost:5000/notes/${id}`, {
             method: 'DELETE',
             headers: {
+                'Authorization': 'Bearer' + token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(note)
