@@ -7,7 +7,6 @@ import './App.css';
 import NotesListPage from './pages/NotesListPage';
 import Header from './components/Header';
 import NotePage from './pages/NotePage';
-import Auth from './pages/Auth';
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import { useEffect, useState } from "react";
@@ -49,9 +48,8 @@ function App() {
             <div className="app">
               <Header />
               <Routes>
-                <Route path='/'
-                  element={<NotesListPage token={token} />} />
-                <Route path='/note/:id' Component={NotePage} />
+                <Route path='/' element={<NotesListPage token={token} />} />
+                <Route path='/note/:id' element={<NotePage token={token} />} />
               </Routes>
             </div>
           </div>

@@ -5,10 +5,10 @@ import AddButton from '../components/AddButton'
 
 const NotesListPage = (token) => {
     let [notes, setNotes] = useState([])
-
+    console.log(notes)
     useEffect(() => {
         if (token) {
-            getNotes( token)
+            getNotes(token)
         }
     }, [token])
 
@@ -16,11 +16,11 @@ const NotesListPage = (token) => {
         try {
             let response = await fetch('http://localhost:5000/notes', {
                 headers: {
-                    Authorization: "Bearer" + token
+                    Authorization: `Token ${token.token}`,
+                    Accept: "application/json"
                 }
             });
             let data = await response.json();
-            console.log(data)
             setNotes(data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -28,6 +28,7 @@ const NotesListPage = (token) => {
     }
 
     return (
+
         <div className='notes'>
             <div className='notes-list'>
                 <div className='notes-header'>
@@ -35,14 +36,14 @@ const NotesListPage = (token) => {
                     <p className='notes-count'>{notes.length}</p>
                 </div>
 
-                {notes.map((note, index) => (
-
+                {Array.from(notes).map((note, index) => (
                     <ListItem key={index} note={note} />
-
                 ))}
             </div>
             <AddButton />
         </div>
+
+
     )
 }
 

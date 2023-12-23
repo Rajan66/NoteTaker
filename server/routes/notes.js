@@ -1,10 +1,11 @@
 const express = require('express')
+const middleware = require('../middleware')
 const { getNotes, getNote, createNote, updateNote, deleteNote } = require('../controllers/notes')
 
 const router = express.Router()
 
-router.get('/', getNotes)
-router.get('/:id', getNote)
+router.get('/', middleware.decodeToken, getNotes)
+router.get('/:id', middleware.decodeToken, getNote)
 
 router.post('/', createNote)
 router.patch('/:id', updateNote)

@@ -4,13 +4,13 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { ReactComponent as ArrowLeft } from '../assets/arrow-left.svg'
 
-const NotePage = (props) => {
+const NotePage = (token) => {
     const { id } = useParams()
     const navigate = useNavigate();
     let [note, setNote] = useState(null)
 
     useEffect(() => {
-        getNote(props.token)
+        getNote()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
@@ -18,7 +18,8 @@ const NotePage = (props) => {
         if (id === 'new') return
         let response = await fetch(`http://localhost:5000/notes/${id}`, {
             headers: {
-                Authorization: "Bearer" + props.token
+                Authorization: `Token ${token.token}`,
+                Accept: "application/json"
             }
         })
         let data = await response.json()
