@@ -4,50 +4,54 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { ReactComponent as ArrowLeft } from '../assets/arrow-left.svg'
 
-const NotePage = ({ token }) => {
+const NotePage = (props) => {
     const { id } = useParams()
     const navigate = useNavigate();
     let [note, setNote] = useState(null)
 
     useEffect(() => {
-        getNote()
+        getNote(props.token)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
     let getNote = async () => {
         if (id === 'new') return
-        let response = await fetch(`http://localhost:5000/notes/${id}`)
+        let response = await fetch(`http://localhost:5000/notes/${id}`, {
+            headers: {
+                Authorization: "Bearer" + props.token
+            }
+        })
         let data = await response.json()
         setNote(data)
     }
 
-    let createNote = async ({ token }) => {
+    let createNote = async () => {
         await fetch(`http://localhost:5000/notes/`, {
             method: 'POST',
             headers: {
-                'Authorization': 'Bearer' + token,
+                // 'Authorization': 'Bearer' + token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ ...note, 'updatedAt': new Date() })
         })
     }
 
-    let updateNote = async ({ token }) => {
+    let updateNote = async () => {
         await fetch(`http://localhost:5000/notes/${id}`, {
             method: 'PATCH',
             headers: {
-                'Authorization': 'Bearer' + token,
+                // 'Authorization': 'Bearer' + token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ ...note, 'updatedAt': new Date() })
         })
     }
 
-    let deleteNote = async ({ token }) => {
+    let deleteNote = async () => {
         await fetch(`http://localhost:5000/notes/${id}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': 'Bearer' + token,
+                // 'Authorization': 'Bearer' + token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(note)

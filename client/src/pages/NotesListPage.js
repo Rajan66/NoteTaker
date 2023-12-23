@@ -3,16 +3,22 @@ import React, { useState, useEffect } from 'react'
 import ListItem from '../components/ListItem'
 import AddButton from '../components/AddButton'
 
-const NotesListPage = ({ token }) => {
+const NotesListPage = (token) => {
     let [notes, setNotes] = useState([])
 
     useEffect(() => {
-        getNotes()
-    }, [])
+        if (token) {
+            getNotes( token)
+        }
+    }, [token])
 
     let getNotes = async () => {
         try {
-            let response = await fetch('http://localhost:5000/notes');
+            let response = await fetch('http://localhost:5000/notes', {
+                headers: {
+                    Authorization: "Bearer" + token
+                }
+            });
             let data = await response.json();
             console.log(data)
             setNotes(data);

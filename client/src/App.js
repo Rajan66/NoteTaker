@@ -49,7 +49,8 @@ function App() {
             <div className="app">
               <Header />
               <Routes>
-                <Route path='/' render={(props) => <NotesListPage token={token} {...props} />} />
+                <Route path='/'
+                  element={<NotesListPage token={token} />} />
                 <Route path='/note/:id' Component={NotePage} />
               </Routes>
             </div>
