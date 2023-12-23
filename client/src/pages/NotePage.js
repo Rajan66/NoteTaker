@@ -30,8 +30,8 @@ const NotePage = (token) => {
         await fetch(`http://localhost:5000/notes/`, {
             method: 'POST',
             headers: {
-                // 'Authorization': 'Bearer' + token,
-                'Content-Type': 'application/json'
+                Authorization: `Token ${token.token}`,
+                Accept: "application/json"
             },
             body: JSON.stringify({ ...note, 'updatedAt': new Date() })
         })
@@ -41,8 +41,8 @@ const NotePage = (token) => {
         await fetch(`http://localhost:5000/notes/${id}`, {
             method: 'PATCH',
             headers: {
-                // 'Authorization': 'Bearer' + token,
-                'Content-Type': 'application/json'
+                Authorization: `Token ${token.token}`,
+                Accept: "application/json"
             },
             body: JSON.stringify({ ...note, 'updatedAt': new Date() })
         })
@@ -52,8 +52,8 @@ const NotePage = (token) => {
         await fetch(`http://localhost:5000/notes/${id}`, {
             method: 'DELETE',
             headers: {
-                // 'Authorization': 'Bearer' + token,
-                'Content-Type': 'application/json'
+                Authorization: `Token ${token.token}`,
+                Accept: "application/json"
             },
             body: JSON.stringify(note)
         })
