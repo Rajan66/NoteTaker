@@ -31,7 +31,7 @@ const NotePage = (token) => {
             method: 'POST',
             headers: {
                 Authorization: `Token ${token.token}`,
-                Accept: "application/json"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ ...note, 'updatedAt': new Date() })
         })
@@ -42,7 +42,7 @@ const NotePage = (token) => {
             method: 'PATCH',
             headers: {
                 Authorization: `Token ${token.token}`,
-                Accept: "application/json"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ ...note, 'updatedAt': new Date() })
         })
@@ -53,7 +53,7 @@ const NotePage = (token) => {
             method: 'DELETE',
             headers: {
                 Authorization: `Token ${token.token}`,
-                Accept: "application/json"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(note)
         })
