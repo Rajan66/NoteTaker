@@ -16,7 +16,7 @@ const NotePage = (token) => {
 
     let getNote = async () => {
         if (id === 'new') return
-        let response = await fetch(`http://localhost:5000/notes/${id}`, {
+        let response = await fetch(`https://notetaker-f5lt.onrender.com/notes/${id}`, {
             headers: {
                 Authorization: `Token ${token.token}`,
                 Accept: "application/json"
@@ -27,7 +27,7 @@ const NotePage = (token) => {
     }
 
     let createNote = async () => {
-        await fetch(`http://localhost:5000/notes/`, {
+        await fetch(`https://notetaker-f5lt.onrender.com/notes/`, {
             method: 'POST',
             headers: {
                 Authorization: `Token ${token.token}`,
@@ -38,7 +38,7 @@ const NotePage = (token) => {
     }
 
     let updateNote = async () => {
-        await fetch(`http://localhost:5000/notes/${id}`, {
+        await fetch(`https://notetaker-f5lt.onrender.com/notes/${id}`, {
             method: 'PATCH',
             headers: {
                 Authorization: `Token ${token.token}`,
@@ -49,7 +49,7 @@ const NotePage = (token) => {
     }
 
     let deleteNote = async () => {
-        await fetch(`http://localhost:5000/notes/${id}`, {
+        await fetch(`https://notetaker-f5lt.onrender.com/notes/${id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Token ${token.token}`,

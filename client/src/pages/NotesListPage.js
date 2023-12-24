@@ -15,7 +15,7 @@ const NotesListPage = (token) => {
 
     let getNotes = async () => {
         try {
-            let response = await fetch('http://localhost:5000/notes', {
+            let response = await fetch('https://notetaker-f5lt.onrender.com/notes', {
                 headers: {
                     Authorization: `Token ${token.token}`,
                     Accept: "application/json"
