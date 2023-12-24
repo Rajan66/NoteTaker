@@ -88,7 +88,6 @@ const NotePage = (token) => {
 
             </div>
             <textarea onChange={(e) => { setNote({ ...note, 'body': e.target.value }) }} value={note?.body}>
-
             </textarea>
         </div >
     )

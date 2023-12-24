@@ -2,10 +2,8 @@ const mongoose = require('mongoose')
 const Note = require('../models/note')
 
 const getNotes = async (req, res) => {
-    const { user_id } = req.userId
     try {
         const notes = await Note.find({ user_id: req.userId })
-        console.log(notes)
         res.status(200).json(notes)
     } catch (error) {
         res.status(404).json({ message: error.message })

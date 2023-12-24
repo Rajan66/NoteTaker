@@ -1,7 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
-
 const firebaseConfig = {
     apiKey: "AIzaSyBaD5Yji_t6O6mrQu6QIbjDTniyBlFf8OE",
     authDomain: "notetaker-b5907.firebaseapp.com",

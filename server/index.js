@@ -9,7 +9,6 @@ const middleware = require('./middleware')
 const app = express()
 dotenv.config()
 
-
 app.use(cors())
 app.use(bodyParser.json({ extended: true }))
 
