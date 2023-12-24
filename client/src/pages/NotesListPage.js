@@ -5,7 +5,8 @@ import AddButton from '../components/AddButton'
 
 const NotesListPage = (token) => {
     let [notes, setNotes] = useState([])
-    console.log(notes)
+
+
     useEffect(() => {
         if (token) {
             getNotes(token)
@@ -35,13 +36,18 @@ const NotesListPage = (token) => {
                     <h2 className='notes-title'>&#9782; Notes</h2>
                     <p className='notes-count'>{notes.length}</p>
                 </div>
-
-                {Array.from(notes).map((note, index) => (
+                {!notes ? (
+                    <div>
+                        No notes found
+                    </div>
+                ) : (Array.from(notes).map((note, index) => (
                     <ListItem key={index} note={note} />
-                ))}
+                ))
+                )}
+
             </div>
             <AddButton />
-        </div>
+        </div >
 
 
     )

@@ -28,8 +28,7 @@ function App() {
   }, [])
 
   const loginWithGoogle = () => {
-    firebase
-      .auth()
+    firebase.auth()
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(
         (userCred) => {
@@ -40,6 +39,17 @@ function App() {
         }
       )
   }
+
+  const handleLogout = () => {
+    firebase.auth().signOut()
+      .then(() => {
+        console.log('User logged out');
+        setAuth(false)
+        window.localStorage.setItem('auth', 'false')
+      }).catch((error) => {
+        console.error('Error during logout:', error);
+      });
+  };
   return (
     <>
       {auth ? (
@@ -51,8 +61,11 @@ function App() {
                 <Route path='/' element={<NotesListPage token={token} />} />
                 <Route path='/note/:id' element={<NotePage token={token} />} />
               </Routes>
+
             </div>
+            <button style={{ marginTop: "20px" }} >Logout</button>
           </div>
+
         </Router>
       ) : (
         <div>

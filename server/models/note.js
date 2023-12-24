@@ -15,6 +15,9 @@ const noteSchema = mongoose.Schema({
     updatedAt: {
         type: Date,
         default: new Date()
+    },
+    user_id: {
+        type: String,
     }
 })
 

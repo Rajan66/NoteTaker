@@ -7,8 +7,8 @@ const router = express.Router()
 router.get('/', middleware.decodeToken, getNotes)
 router.get('/:id', middleware.decodeToken, getNote)
 
-router.post('/', createNote)
-router.patch('/:id', updateNote)
-router.delete('/:id', deleteNote)
+router.post('/', middleware.decodeToken, createNote)
+router.patch('/:id', middleware.decodeToken, updateNote)
+router.delete('/:id', middleware.decodeToken, deleteNote)
 
 module.exports = router

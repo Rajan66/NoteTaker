@@ -2,8 +2,10 @@ const mongoose = require('mongoose')
 const Note = require('../models/note')
 
 const getNotes = async (req, res) => {
+    const { user_id } = req.userId
     try {
-        const notes = await Note.find()
+        const notes = await Note.find({ user_id: req.userId })
+        console.log(notes)
         res.status(200).json(notes)
     } catch (error) {
         res.status(404).json({ message: error.message })
@@ -23,8 +25,7 @@ const getNote = async (req, res) => {
 
 const createNote = async (req, res) => {
     const note = req.body
-    console.log(note)
-    const newNote = new Note({ ...note, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() })
+    const newNote = new Note({ ...note, user_id: req.userId, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() })
     try {
         await newNote.save()
         res.status(201).json(newNote)
