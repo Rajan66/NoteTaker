@@ -3,7 +3,7 @@ const Note = require('../models/note')
 
 const getNotes = async (req, res) => {
     try {
-        const notes = await Note.find({ user_id: req.userId })
+        const notes = await Note.find({ user_id: req.userId }).sort({ updatedAt: -1 })
         res.status(200).json(notes)
     } catch (error) {
         res.status(404).json({ message: error.message })
